@@ -7,25 +7,49 @@ long long getInput(void);
 int main(void)
 {
     long long input = getInput();
-    long long countup = 4;
+    long long countup = 4; //Countup begins at 4 because Goldbach speaks of ℕ⁺>2. 
 
     long long truecounter = 0;
     long long a, b, tempcounter;
 
+    /* EXAMPLE:
+
+        __13th ITERATION_   OUTER WHILE LOOP    INNER WHILE LOOP
+                            input   =     32            
+                            countup =     28
+                            a       =      0    
+                            b       =     28    
+                                                a++    |      b--
+                                                1 (NP) |      27 (NP)
+                                                2 (P)  |      26 (NP)
+                                                3 (P)  |      25 (NP)
+                                                5 (P)  |      23 (P) 
+                                                -- BREAK; 
+                            -- countup += 2;
+
+        __14th ITERATION_   input   =     32            
+                            countup =     30
+                            ...
+    */
 
     while(countup <= input)
     {
         a = 0;
         b = countup;
         tempcounter = 0;
-        
-        while(a++ <= (countup / 2) && b-- >= (countup / 2) )
+
+        /*  Variables (a) and (b) work in locked pairs.
+            (a) increments; (b) decrements. 
+            When a & b are primes, countup increments by 2  */
+
+        while(a++ <= (countup / 2) && b-- >= (countup / 2)) 
         {   
-            if ( (a + b) == countup && isPrime(a) == 1 && isPrime(b) == 1)
+            if (isPrime(a) == 1 && isPrime(b) == 1)
             {
                 truecounter++;
                 tempcounter = 1;
 
+                // Hereon all primes are odd numbers.
                 if (a > 3)
                 {
                     a++;
@@ -46,7 +70,7 @@ int main(void)
             a++;
             b--;
         }
-        
+
         countup += 2;
     }
     printf("\nThere are \t[%lld] even numbers in the range (4 - %lld).\n\t\t[%lld] fulfilled Goldbach's Conjecture in this check.\n\n", (input / 2) - 1, input, truecounter);
