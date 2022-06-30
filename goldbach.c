@@ -1,53 +1,46 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int isPrime(long);
-long long getInput(void);
+typedef unsigned long long ULL;
+
+ULL getInput(void);
+int isPrime(ULL);
+void initiateChecker(ULL);
+
+// REF for debug:  https://www.mathematical.com/primelist1to100kk.html
+// REF for primes: https://docs.microsoft.com/en-us/cpp/c-language/cpp-integer-limits?view=msvc-170
 
 int main(void)
 {
-    long long input = getInput();
-    long long countup = 4; //Countup begins at 4 because Goldbach speaks of ℕ⁺>2. 
+    ULL userInput = getInput();
+    
+    initiateChecker(userInput);
+}
 
-    long long truecounter = 0;
-    long long a, b, tempcounter;
 
-    /* EXAMPLE:
+void initiateChecker(ULL userInput)
+{
+    ULL countUp = 4; //Countup begins at 4 because Goldbach speaks of (positive numbers >2). 
+    ULL goldbachIsRight = 0;
+    ULL a, b, tempCounter, halfCountup;
 
-        __13th ITERATION_   OUTER WHILE LOOP    INNER WHILE LOOP
-                            input   =     32            
-                            countup =     28
-                            a       =      0    
-                            b       =     28    
-                                                a++    |      b--
-                                                1 (NP) |      27 (NP)
-                                                2 (P)  |      26 (NP)
-                                                3 (P)  |      25 (NP)
-                                                5 (P)  |      23 (P) 
-                                                -- BREAK; 
-                            -- countup += 2;
-
-        __14th ITERATION_   input   =     32            
-                            countup =     30
-                            ...
-    */
-
-    while(countup <= input)
+    while(countUp <= userInput)
     {
         a = 0;
-        b = countup;
-        tempcounter = 0;
+        b = countUp;
+        halfCountup = (countUp / 2);
+        tempCounter = 0;
 
         /*  Variables (a) and (b) work in locked pairs.
             (a) increments; (b) decrements. 
             When a & b are primes, countup increments by 2  */
 
-        while(a++ <= (countup / 2) && b-- >= (countup / 2)) 
+        while( (a++ <= halfCountup) && (b-- >= halfCountup) ) 
         {   
             if (isPrime(a) == 1 && isPrime(b) == 1)
             {
-                truecounter++;
-                tempcounter = 1;
+                goldbachIsRight++;
+                tempCounter = 1;
 
                 // Hereon all primes are odd numbers.
                 if (a > 3)
@@ -59,10 +52,11 @@ int main(void)
             }
         }
         
-        if ( tempcounter != 1 )
+        // By now, if Goldbach's conjecture is WRONG for a given even number, (tempCounter == 0)
+        if ( tempCounter != 1 ) 
         {
-                printf("Conjecture failed: %lld is even and cannot be formed by primes.\n", countup);
-                return 1;
+                printf("Conjecture failed: %llu is even and cannot be formed by primes.\n", countUp);
+                exit(1);
         }
 
         if (a > 3)
@@ -71,13 +65,14 @@ int main(void)
             b--;
         }
 
-        countup += 2;
+        countUp += 2;
     }
-    printf("\nThere are \t[%lld] even numbers in the range (4 - %lld).\n\t\t[%lld] fulfilled Goldbach's Conjecture in this check.\n\n", (input / 2) - 1, input, truecounter);
+    printf("\nThere are \t[%llu] even numbers in the range (4 - %llu).\n\t\t[%llu] fulfilled Goldbach's Conjecture in this check.\n\n", (userInput / 2) - 1, userInput, goldbachIsRight);
+
 }
 
 
-int isPrime(long n)
+int isPrime(ULL n)
 {
     if (n == 2 || n == 3)
         return 1;
@@ -93,10 +88,11 @@ int isPrime(long n)
     return 1;
 }
 
-long long getInput(void)
+ULL getInput(void)
 {
-    long long a;
+    ULL a;
     char buf[1024];
+    char *ptr;
 
     do 
     {
@@ -108,7 +104,9 @@ long long getInput(void)
             printf("\nInvalid input. Must input a number.\n");
             exit(1);
         }
-        a = atoi(buf);
+
+        //  strtoull(converted buffer, string to catch non-numbers, base 10)
+        a = strtoull(buf, &ptr, 10);
         
         if (a < 4)
         {
@@ -119,7 +117,7 @@ long long getInput(void)
         if ( !(a % 2 == 0) )
         {
             a = a - 1;
-            printf("Checking up to %lld...\n", a);
+            printf("Checking up to %llu...\n", a);
             return a;    
         }
 
