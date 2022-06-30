@@ -15,7 +15,6 @@ int main(void)
 
     char * primeLookup;
     primeLookup = populatePrimeLookup(userInput);
-
 }
 
 char * populatePrimeLookup(u32 userInput)
@@ -59,7 +58,7 @@ u32 getInput(void)
 
     do 
     {
-        printf("\nInput threshold integer to check for an exception: ");
+        printf("\nInput integer threshold to load into prime bool table: ");
         
         if (!fgets(buf, 1024, stdin))
         {
@@ -68,24 +67,27 @@ u32 getInput(void)
         }
 
         //  strtoull(converted buffer, string to catch non-numbers if needed, base 10)
-        a = strtoull(buf, &ptr, 10);
-        
-        if (a < 4)
-        {
-            printf("\nInvalid input. Must input a number over 3.\n");
-            exit(1);
-        }
-       
-        if ( !(a % 2 == 0) )
-        {
-            a = a - 1;
-            printf("Checking up to %u...\n", a);
-            return a;    
-        }
-
-        printf("Checking...\n");
+        a = (uint32_t)strtoul(buf, &ptr, 10);
+    
+        printf("Running...\n");
         return a;
 
     } while (a == 0);
 }
 
+    //     //DEBUG:
+    //     printf("\n\n\n0 is %i  and should be 0\n",  primeLookup[0]);
+    //     printf("1 is %i  and should be 0\n",  primeLookup[1]);
+    //     printf("2 is %i  and should be 1\n",  primeLookup[2]);
+    //     printf("3 is %i  and should be 1\n",  primeLookup[3]);
+    //     printf("4 is %i  and should be 0\n\n",  primeLookup[4]);
+    //     printf("29 is %i and should be 1\n\n", primeLookup[29]);
+    //     printf("96 is %i and should be 0\n", primeLookup[96]);
+    //     printf("97 is %i and should be 1\n", primeLookup[97]);
+    //     printf("98 is %i and should be 0\n", primeLookup[98]);
+    //     // printf("7919 is %i and should be 1 \n", primeLookup[7919]);
+    //     // printf("7920 is %i and should be 0\n", primeLookup[7920]);
+    //     // printf("999983 is %i and should be 1\n", primeLookup[999983]);
+    //     // printf("999985 is %i and should be 0\n", primeLookup[999985]);
+    //     // printf("111111100 is %i and should be 0\n\n", primeLookup[111111100]);
+    //     // printf("15485863 is %i and should be 1\n", primeLookup[15485863]);
