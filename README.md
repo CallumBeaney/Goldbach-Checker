@@ -11,13 +11,15 @@ There are [49999999] even numbers in the range (4 - 100000000).
 ~~~               
 ## LOOP LOGIC
 ~~~
-Let's say that (the variable userInput == 33) and so we check Goldbach's Conjecture up to 32.  
-Program counts up starting at 4 in twos (countUp defaults at 4), until (countUp == 32).  
+Let's say that (the variable >userInput = 33) and so we check Goldbach's Conjecture up to 32.  
+Program increments a variabl called >countUp starting at 4 in twos (countUp defaults at 4), until (countUp = 32).  
 
-In the OUTER LOOP - (a = 0), and (b == countUp) for a given value of countUp in the OUTER LOOP.  
-In the INNER LOOP - Variables (a) and (b) work in locked pairs. (a) increments; (b) decrements.  
-                  - As such, (a + b) will always be equal to countUp.   
-                  - If on a given loop (both a and b are primes), break to the OUTER LOOP.  
+In the OUTER LOOP - (a = 0), and (b = countUp) for a given value of countUp in the OUTER LOOP.  
+In the INNER LOOP - Variables (a) and (b) work in locked pairs.
+                  - (a) increments by 1; (b) decrements by 1.  
+                  - As such, (a + b) will always be equal to the OUTER LOOP value of countUp.   
+                  - If on a given loop (both a and b are primes), break to the OUTER LOOP.
+                  - Otherwise, keep going until (a == b) and then break.
 Rtn to OUTER LOOP - The program checks whether the INNER LOOP found (a & b are primes).
                   - When it does, countup increments by 2. Otherwise, the program ends.
 
