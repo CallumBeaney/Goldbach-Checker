@@ -24,9 +24,9 @@ Let's say that the user inputs '33'. The program will check Goldbach's Conjectur
 |             | When it does, countup increments by 2. Otherwise, the program ends.        |
 
 ### EXAMPLE
-Let's say we're on the 13th loop of both INNER and OUTER loops where (userInput == 32), and (countUp == 28).  
-The program proceeds as such:
-
+Let's say we're on the 13th loop of the OUTER loop, where (userInput == 32), and (countUp == 28).  
+Countup started at 4, and counted up in twos 13 times.  
+The program proceeds as such:  
 ~~~
 __13th ITERATION_     OUTER WHILE LOOP    INNER WHILE LOOP
                       userInput =   32            
