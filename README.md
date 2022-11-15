@@ -11,21 +11,21 @@ There are [49999999] even numbers in the range (4 - 100000000).
 ~~~               
 ## LOOP LOGIC
 
-Let's say that (the variable userInput = 33) and so we check Goldbach's Conjecture up to 32.  
-Program increments a variable called countUp starting at 4 in twos (countUp defaults at 4), until (countUp = 32).  
+Let's say that the user inputs '33'. The program will check Goldbach's Conjecture up to 32, which is called userInput.  
+Program increments a variable called countUp in twos (countUp begins at 4), until it equals the userInput, 32.  
 
 | Place in file   |   What's happening |
 | ----------- | ----------- |
-| OUTER LOOP  | (a = 0), and (b = countUp) for a given value of countUp in OUTER LOOP.  |
-| INNER LOOP  | Variables (a) and (b) work in locked pairs. |
-|             | (a) increments by 1; (b) decrements by 1. |
+| OUTER LOOP  | (a = 0), and (b = countUp) for a given value of countUp in OUTER LOOP. |
+| INNER LOOP  | These variables change as a locked pair: (a++) and (b--). |
 |             | As such, (a + b) will always be equal to the OUTER LOOP value of countUp. |  
-|             | If on a given loop (both a and b are primes), break to the OUTER LOOP. |                   
-|             | Otherwise, keep going until (a == b) and then break. |
-| OUTER LOOP  | The program checks whether the INNER LOOP found (a & b are primes). |
-|             |  When it does, countup increments by 2. Otherwise, the program ends.        |
+|             | If on a given loop (both a and b are primes), program breaks to the OUTER LOOP. |                   
+|             | Otherwise, it keeps going until (a == b) and then breaks. |
+| OUTER LOOP  | The program checks whether the INNER LOOP found (a && b are primes). |
+|             | When it does, countup increments by 2. Otherwise, the program ends.        |
 
-On the 13th loop of both INNER and OUTER loops where (userInput == 32), (countUp == 28). 
+### EXAMPLE
+Let's say we're on the 13th loop of both INNER and OUTER loops where (userInput == 32), and (countUp == 28).  
 The program proceeds as such:
 
 ~~~
@@ -38,7 +38,8 @@ __13th ITERATION_     OUTER WHILE LOOP    INNER WHILE LOOP
                                           1 (NP) |    27 (NP)
                                           2 (P)  |    26 (NP)
                                           3 (P)  |    25 (NP)
-                                          5 (P)  |    23 (P) 
+                                          4 (NP) |    24 (NP)                                         
+                                          5 (P)  |    23 (P)  <-- BOTH PRIMES
                                           -- BREAK; 
                       -- countup += 2;
 
@@ -50,6 +51,7 @@ __14th ITERATION_     userInput =   32
                                           1 (NP) |    29 (P)
                                           2 (P)  |    28 (NP)
                                           ...
+                                          ... and so on
 ~~~ 
 
 
