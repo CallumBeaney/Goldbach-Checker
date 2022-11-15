@@ -11,8 +11,7 @@ There are [49999999] even numbers in the range (4 - 100000000).
 ~~~               
 ## LOOP LOGIC
 
-Let's say that the user inputs '33'. The program will check Goldbach's Conjecture up to 32, which is called userInput.  
-Program increments a variable called countUp in twos (countUp begins at 4), until it equals the userInput, 32.  
+Let's say that the user inputs '33'. The program will check Goldbach's Conjecture up to 32, assigned to the variable 'userInput'. The program will increment a variable called countUp in twos (countUp begins at 4), until it is equal to userInput.  
 
 | Place in file   |   What's happening |
 | ----------- | ----------- |
